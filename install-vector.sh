@@ -7,7 +7,7 @@ fi
 
 VECTOR_HOME="/root/.vector"
 VECTOR_BIN="${VECTOR_HOME}/bin/vector"
-CONFIG_ARCHIVE="https://woolab.app/vector-config.tar.gz"
+CONFIG_ARCHIVE="https://github.com/netzencatura/server-metrics/raw/refs/heads/main/vector-config.tar.gz"
 
 echo "1. Removing old installation..."
 systemctl stop vector 2>/dev/null
