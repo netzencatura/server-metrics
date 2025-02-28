@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+package.json
+package-lock.json
+
+# Webpack
+webpack.config.js
+
+# Build tools
+build-zip.sh
+
+# Composer
+composer.json
+vendor/
+
+# Zip files
+server-metrics.zip
+
+# Other files
+zdrojove_soubory.txt
+
+# OS specific files
+.DS_Store
+Thumbs.db
