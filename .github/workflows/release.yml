@@ -1,0 +1,29 @@
+name: Create Release Archive
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Create properly named archive
+        run: |
+          mkdir -p build/server-metrics
+          cp -r * build/server-metrics/ || true
+          rm -rf build/server-metrics/build
+          cd build
+          zip -r server-metrics.zip server-metrics
+      
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./build/server-metrics.zip
+          asset_name: server-metrics.zip
+          asset_content_type: application/zip
