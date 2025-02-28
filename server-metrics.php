@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Server Metrics
  * Description: Display server and website metrics from Enhance CP cluster
- * Version: 1.0.18
+ * Version: 1.0.19
  * Author: Your name
  * Text Domain: server-metrics
  * Domain Path: /languages
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definice konstant
-define('SERVER_METRICS_VERSION', '1.0.18');
+define('SERVER_METRICS_VERSION', '1.0.19');
 define('SERVER_METRICS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SERVER_METRICS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SERVER_METRICS_PLUGIN_FILE', __FILE__);
@@ -48,13 +48,16 @@ function sm_register_plugin_updater() {
     
     // Inicializace kontroly aktualizací
     $updateChecker = \YahnisElsts\PluginUpdateChecker\v5p5\PucFactory::buildUpdateChecker(
-        'https://github.com/netzencatura/server-metrics/',  // URL vašeho GitHub repozitáře
-        SERVER_METRICS_PLUGIN_FILE,                         // Cesta k hlavnímu souboru pluginu
-        'server-metrics'                                    // Slug pluginu
+        'https://github.com/netzencatura/server-metrics/',
+        SERVER_METRICS_PLUGIN_FILE,
+        'server-metrics'
     );
     
     // Nastavení větve, pokud používáte jinou než master/main
     $updateChecker->setBranch('main');
+    
+    // Aktivace použití release assetů - důležité pro správnou aktualizaci
+    $updateChecker->getVcsApi()->enableReleaseAssets();
 }
 
 // Spuštění kontroly aktualizací při načtení WordPressu
