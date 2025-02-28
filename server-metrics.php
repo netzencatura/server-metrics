@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Server Metrics
  * Description: Display server and website metrics from Enhance CP cluster
- * Version: 1.0.19
- * Author: Your name
+ * Version: 1.0.20
+ * Author: Netzen Catura
  * Text Domain: server-metrics
  * Domain Path: /languages
  *
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definice konstant
-define('SERVER_METRICS_VERSION', '1.0.19');
+define('SERVER_METRICS_VERSION', '1.0.20');
 define('SERVER_METRICS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SERVER_METRICS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SERVER_METRICS_PLUGIN_FILE', __FILE__);
