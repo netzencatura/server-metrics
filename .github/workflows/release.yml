@@ -1,29 +1,26 @@
-name: Create Release Archive
+name: Build Plugin
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Create properly named archive
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build project
         run: |
           mkdir -p build/server-metrics
-          cp -r * build/server-metrics/ || true
-          rm -rf build/server-metrics/build
+          rsync -av --exclude='.git' --exclude='.github' --exclude='build' --exclude='.gitignore' ./ build/server-metrics/
           cd build
           zip -r server-metrics.zip server-metrics
-      
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./build/server-metrics.zip
-          asset_name: server-metrics.zip
-          asset_content_type: application/zip
+          files: build/server-metrics.zip
