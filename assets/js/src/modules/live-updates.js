@@ -204,9 +204,10 @@ const LiveUpdates = {
     console.log("Aktualizace grafů s novými daty:", newData.length, "bodů");
 
     // Připravit data pro grafy
-    const labels = newData.map((item) =>
-      new Date(item.timestamp).toLocaleString()
-    );
+    const labels = newData.map((item) => {
+      const date = new Date(item.timestamp);
+      return date.getHours() + ":" + date.getMinutes();
+    });
     const cpuData = newData.map((item) => item.cpu_usage);
     const memoryData = newData.map((item) => item.mem_usage);
     const ioReadData = newData.map((item) => item.io_read_rate);
@@ -232,6 +233,10 @@ const LiveUpdates = {
       ioWriteData,
       this.maxPoints
     );
+    Charts.cpuChart.update();
+    Charts.memoryChart.update();
+    Charts.ioReadChart.update();
+    Charts.ioWriteChart.update();
   },
 
   /**
