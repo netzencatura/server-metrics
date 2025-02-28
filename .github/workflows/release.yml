@@ -16,7 +16,7 @@ jobs:
       - name: Build project
         run: |
           mkdir -p build/server-metrics
-          rsync -av --exclude='.git' --exclude='.github' --exclude='build' --exclude='.gitignore' ./ build/server-metrics/
+          rsync -av --exclude='.git' --exclude='.github' --exclude='build' --exclude='.gitignore' --exclude='vector-config.tar.gz' --exclude='install-vector.sh' ./ build/server-metrics/
           cd build
           zip -r server-metrics.zip server-metrics
 
